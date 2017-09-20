@@ -1,0 +1,13 @@
+package com.sample
+
+global String var1;
+global Integer var2;
+
+rule "Rule 1"
+    when
+        value: Object (true)
+    then
+        System.out.println( "Fact: " + value);
+        System.out.println( "var1: " + var1);
+        System.out.println( "var2: " + var2);
+end
