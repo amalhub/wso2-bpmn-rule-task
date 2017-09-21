@@ -62,6 +62,22 @@ public class RuleTaskTest {
         Assert.assertTrue(output.equals(expected.toString()));
     }
 
+    @Test
+    public void testOutputVariables() throws IOException, DroolsParserException {
+        InputStream inputStream = RuleTaskTest.class.getResourceAsStream("/rule2.drl");
+        Map<String, Object> globals = new HashMap<String, Object>();
+        List<Object> facts = new ArrayList<Object>();
+
+        globals.put("var1", 10);
+        globals.put("var2", 100);
+        globals.put("var3", 0);
+        facts.add("DefaultFact");
+
+        RuleExecutor.execute(inputStream, globals, facts);
+        Assert.assertEquals(globals.get("var3"), 110);
+    }
+
+
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));

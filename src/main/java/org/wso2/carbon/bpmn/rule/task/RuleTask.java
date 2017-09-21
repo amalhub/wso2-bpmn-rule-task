@@ -66,13 +66,24 @@ public class RuleTask implements JavaDelegate {
             }
 
             InputStream inputStream = readRegResource(execution, drlRegPathValue);
+            // Read global variables from BPMN variables
             Map<String, Object> globals = prepareGlobals(execution);
+            // Read facts from BPMN variables
             List<Object> facts = prepareFacts(execution);
+            // Execute the rule file
             RuleExecutor.execute(inputStream, globals, facts);
+            // Update global variables from the values returned by the rule execution
+            updateGlobals(execution, globals);
         } catch (Exception e) {
             // Log error here since the caller does not log it
             log.error(e);
             throw e;
+        }
+    }
+
+    private void updateGlobals(DelegateExecution execution, Map<String, Object> globals) {
+        for(String key: globals.keySet()) {
+            execution.setVariable(GLOBAL_PREFIX + key, globals.get(key));
         }
     }
 

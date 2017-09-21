@@ -51,12 +51,19 @@ public class RuleExecutor {
         ruleBase.addPackage(rulesPackage);
 
         WorkingMemory workingMemory = ruleBase.newStatefulSession();
+        // Set global variables
         for(String key: globals.keySet()) {
             workingMemory.setGlobal(key, globals.get(key));
         }
+        // Set facts
         for (Object fact: facts) {
             workingMemory.insert(fact);
         }
         workingMemory.fireAllRules();
+
+        // Return updated global variables
+        for(String key: globals.keySet()) {
+            globals.put(key, workingMemory.getGlobal(key));
+        }
     }
 }

@@ -1,0 +1,16 @@
+package com.sample
+
+global Integer var1;
+global Integer var2;
+global Integer var3;
+
+rule "Rule 1"
+    when
+        value: Object (true)
+    then
+        System.out.println( "var1: " + var1);
+        System.out.println( "var2: " + var2);
+        var3 = var1 + var2;
+        kcontext.getKieRuntime().setGlobal("var3", var3);
+        System.out.println( "var3: " + var3);
+end
