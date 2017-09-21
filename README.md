@@ -16,7 +16,7 @@ BPS registry.
 2. Copy the following JAR files to the lib/ directory of the WSO2 EI/BPS server:
 
     ````bash
-    cp target/bpmn-rule-task-1.0-SNAPSHOT.jar ${WSO2_EI_HOME}/lib/
+    cp target/bpmn-rule-task-1.0-SNAPSHOT.jar ${WSO2_EI_HOME}/dropins/
     cp target/dependency/drools-compiler-6.0.1.Final.jar ${WSO2_EI_HOME}/lib/
     cp target/dependency/drools-core-6.0.1.Final.jar ${WSO2_EI_HOME}/lib/
     cp target/dependency/kie-api-6.0.1.Final.jar ${WSO2_EI_HOME}/lib/
